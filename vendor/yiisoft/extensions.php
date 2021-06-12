@@ -66,4 +66,31 @@ return array (
       '@kartik/date' => $vendorDir . '/kartik-v/yii2-widget-datepicker/src',
     ),
   ),
+  'kartik-v/yii2-widget-depdrop' => 
+  array (
+    'name' => 'kartik-v/yii2-widget-depdrop',
+    'version' => 'dev-master',
+    'alias' => 
+    array (
+      '@kartik/depdrop' => $vendorDir . '/kartik-v/yii2-widget-depdrop/src',
+    ),
+  ),
+  'rmrevin/yii2-fontawesome' => 
+  array (
+    'name' => 'rmrevin/yii2-fontawesome',
+    'version' => '2.12.2.0',
+    'alias' => 
+    array (
+      '@rmrevin/yii/fontawesome' => $vendorDir . '/rmrevin/yii2-fontawesome',
+    ),
+  ),
+  'yiister/yii2-adminlte' => 
+  array (
+    'name' => 'yiister/yii2-adminlte',
+    'version' => '1.0.0.0',
+    'alias' => 
+    array (
+      '@yiister/adminlte' => $vendorDir . '/yiister/yii2-adminlte',
+    ),
+  ),
 );
