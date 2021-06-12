@@ -4,7 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Prodi;
+use app\models\Jurusan;
 use kartik\date\DatePicker;
+use yii\helpers\Url;
+use kartik\depdrop\DepDrop;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Mahasiswa */
@@ -30,8 +34,18 @@ use kartik\date\DatePicker;
         ]
     ]); ?>
 
-    <?= $form->field($model, 'id_prodi')->dropDownList(
-			ArrayHelper::map(Prodi::find()->all(),'id','prodi'))->label('Prodi') ?>
+    <?= $form->field($model, 'id')->dropDownList(Jurusan::getJurusan(),
+        ['id' => 'cat-id', 'prompt' => 'Select Jurusan...']) 
+    ?>
+
+    <?= $form->field($model, 'id_prodi')->widget(DepDrop::classname(), [
+        'options' => ['id' => 'subcat-id', 'prompt' => 'Select Prodi...'],
+        'pluginOptions' => [
+            'depends' => ['cat-id'],
+            'placeholder' => 'Select Prodi...',
+            'url' => Url::to(['mahasiswa/subcat'])
+        ]
+    ]) ?>
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 

@@ -66,6 +66,20 @@ class MahasiswaController extends Controller
         ]);
     }
 
+    public function actionSubcat(){
+        $out = [];
+        if(isset($_POST['depdrop_parents'])){
+            $parents = $_POST['depdrop_parent'];
+            if ($parents != null) {
+                $cat_id = $parents[0];
+                $out = Prodi::getProdiList($cat_id);
+
+                return json_encode(['output'=>$out, 'selected'=>'']);
+            }
+        }
+        return json_encode(['output'=>'', 'selected'=>'']);
+    }
+
     /**
      * Creates a new Mahasiswa model.
      * If creation is successful, the browser will be redirected to the 'view' page.
