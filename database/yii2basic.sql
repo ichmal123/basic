@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 05, 2021 at 06:00 AM
+-- Generation Time: Jun 12, 2021 at 01:46 PM
 -- Server version: 10.3.16-MariaDB
 -- PHP Version: 7.3.7
 
@@ -98,6 +98,27 @@ INSERT INTO `jenis` (`id`, `nama_jenis`, `keterangan`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `jurusan`
+--
+
+CREATE TABLE `jurusan` (
+  `id` int(11) NOT NULL,
+  `KodeJurusan` varchar(20) NOT NULL,
+  `NamaJurusan` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `jurusan`
+--
+
+INSERT INTO `jurusan` (`id`, `KodeJurusan`, `NamaJurusan`) VALUES
+(1, 'J0001', 'Teknologi Informasi'),
+(2, 'J0002', 'Teknik Elektro'),
+(3, 'J0003', 'Teknik Mesin');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `mahasiswa`
 --
 
@@ -132,6 +153,7 @@ INSERT INTO `mahasiswa` (`id`, `nim`, `nama`, `jekel`, `tgllahir`, `id_prodi`, `
 
 CREATE TABLE `prodi` (
   `id` int(11) NOT NULL,
+  `idJurusan` int(11) NOT NULL,
   `prodi` varchar(50) NOT NULL,
   `keterangan` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -140,10 +162,10 @@ CREATE TABLE `prodi` (
 -- Dumping data for table `prodi`
 --
 
-INSERT INTO `prodi` (`id`, `prodi`, `keterangan`) VALUES
-(1, 'Teknologi Rekayasa Perangkat Lunak', 'RPL'),
-(2, 'Manajemen Informasi', 'MI'),
-(3, 'Teknologi Komputer', 'TK');
+INSERT INTO `prodi` (`id`, `idJurusan`, `prodi`, `keterangan`) VALUES
+(1, 1, 'Teknologi Rekayasa Perangkat Lunak', 'RPL'),
+(2, 1, 'Manajemen Informasi', 'MI'),
+(3, 1, 'Teknologi Komputer', 'TK');
 
 -- --------------------------------------------------------
 
@@ -193,6 +215,12 @@ ALTER TABLE `jenis`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `jurusan`
+--
+ALTER TABLE `jurusan`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `mahasiswa`
 --
 ALTER TABLE `mahasiswa`
@@ -203,7 +231,9 @@ ALTER TABLE `mahasiswa`
 -- Indexes for table `prodi`
 --
 ALTER TABLE `prodi`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idJurusan` (`idJurusan`),
+  ADD KEY `idJurusan_2` (`idJurusan`);
 
 --
 -- Indexes for table `supplier`
@@ -226,6 +256,12 @@ ALTER TABLE `barang`
 --
 ALTER TABLE `jenis`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `jurusan`
+--
+ALTER TABLE `jurusan`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `mahasiswa`
@@ -261,6 +297,12 @@ ALTER TABLE `barang`
 --
 ALTER TABLE `mahasiswa`
   ADD CONSTRAINT `mahasiswa_ibfk_1` FOREIGN KEY (`id_prodi`) REFERENCES `prodi` (`id`);
+
+--
+-- Constraints for table `prodi`
+--
+ALTER TABLE `prodi`
+  ADD CONSTRAINT `prodi_ibfk_1` FOREIGN KEY (`idJurusan`) REFERENCES `jurusan` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
