@@ -33,6 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'nama',
             'jekel',
             'tgllahir',
+            'jurusan.NamaJurusan',
             'prodi.prodi',
             //'id_prodi',
             'email:email',

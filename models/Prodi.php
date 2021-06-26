@@ -9,27 +9,24 @@ class Prodi extends ActiveRecord
 	{
 		return 'prodi';
 	}
-	public function getJurusan()
-	{
-		return $this->hasOne(Jurusan::className(), ['id' => 'id_jurusan']);
-	}
-	public static function getProdiList($cat_id)
+	public static function getProdi()
+    {
+        return Self::find()->select(['prodi'])->indexBy('id')->column();
+    }
+	public static function getProdiList($cat_id, $dependent = false)
 	{
 		$subCategory = self::find()
-			-> select(['id', 'prodi'])
-			->wehere(['idJurusan' => $cat_id])
-			->asArray()
-			->all();
-
-			return $subCategory;
+			->where(['id_jurusan' => $cat_id]);
+			
+		// return $subCategory;
 		// $subCategory = self::find()
 		// 	->where(['category_id' => $categoryID]);
 
-		// if ($isAjax == true) {
-		// 	return $subCategory->select(['id', 'prodi'])->asArray()->all();
-		// } else {
-		// 	return $subCategory->select(['name'])->indexBy('id')->column();
-		// }
+		if ($cat_id == "") {
+			return $subCategory->select(['id', 'prodi as name'])->asArray()->all();
+		} else {
+			return $subCategory->select(['prodi'])->indexBy('id')->column();
+		}
 	}
 }
 ?>

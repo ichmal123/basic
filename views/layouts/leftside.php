@@ -46,7 +46,7 @@ use yii\helpers\Url;
                                 [
                                     'label' => 'Mahasiswa',
                                     'icon' => 'fa fa-database',
-                                    'url' => 'mahasiswa/',
+                                    'url' => 'index',
 				    'active' => $this->context->route == 'mahasiswa/index'
                                 ],
                                 [
