@@ -25,6 +25,6 @@ class Jurusan extends \yii\db\ActiveRecord
 
     public static function getJurusan()
     {
-        return Self::find()->select(['NamaJurusan', 'id'])->indexBy('id')->column();
+        return Self::find()->select(['NamaJurusan'])->indexBy('id')->column();
     }
 }
